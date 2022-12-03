@@ -1,0 +1,51 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use ieee.numeric_std.ALL;
+
+ENTITY decoder_tb IS
+END decoder_tb;
+
+ARCHITECTURE BEHAVIORAL OF decoder_tb IS
+ 	COMPONENT decoder
+        PORT(
+            PISO_OBJETIVO : IN std_logic_vector(1 DOWNTO 0);
+            led : OUT std_logic_vector(6 DOWNTO 0)
+            );
+        
+	END COMPONENT;
+        SIGNAL PISO_OBJETIVO : std_logic_vector(1 DOWNTO 0);
+        SIGNAL led : std_logic_vector(6 DOWNTO 0);
+        
+        TYPE vtest is record
+             PISO_OBJETIVO : std_logic_vector(1 DOWNTO 0);
+             led : std_logic_vector(6 DOWNTO 0);
+    END RECORD;
+
+    TYPE vtest_vector IS ARRAY (natural RANGE <>) OF vtest;
+          CONSTANT test: vtest_vector := (
+          (PISO_OBJETIVO => "00", led => "0000001"),
+          (PISO_OBJETIVO => "01", led => "1001111"),
+          (PISO_OBJETIVO => "10", led => "0010010"),
+          (PISO_OBJETIVO => "11", led => "0000110")
+         );
+    BEGIN
+  		uut: decoder PORT MAP(
+     		PISO_OBJETIVO => PISO_OBJETIVO,
+      		led => led
+  		);
+  
+        tb: PROCESS
+        BEGIN
+            FOR i IN 0 TO test'HIGH LOOP
+            		PISO_OBJETIVO<= test(i).PISO_OBJETIVO;
+           		 	WAIT FOR 20 ns;
+            		ASSERT led = test(i).led
+            				REPORT "Salida incorrecta."
+            				SEVERITY FAILURE;
+            END LOOP;
+            
+            ASSERT false
+            		REPORT "Simulacin finalizada. Test superado."
+            		SEVERITY FAILURE;
+        END PROCESS;
+END BEHAVIORAL;
