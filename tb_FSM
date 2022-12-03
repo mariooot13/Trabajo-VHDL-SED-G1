@@ -14,6 +14,7 @@ architecture tb of tb_FSM is
               Feedback_puerta        : in std_logic;
               Botonera               : in std_logic_vector (1 downto 0);
               Aviso_motor_movimiento : out std_logic_vector (1 downto 0);
+              semueveono : out std_logic;
               Aviso_motor_puerta     : out std_logic);
     end component;
 
@@ -25,8 +26,9 @@ architecture tb of tb_FSM is
     signal Botonera               : std_logic_vector (1 downto 0);
     signal Aviso_motor_movimiento : std_logic_vector (1 downto 0);
     signal Aviso_motor_puerta     : std_logic;
+    signal semueveono:std_logic;
 
-	constant TbPeriod : time := 1 ns; 
+	constant TbPeriod : time := 0.5 ns; 
     
 begin
 
@@ -38,6 +40,7 @@ begin
               Feedback_puerta        => Feedback_puerta,
               Botonera               => Botonera,
               Aviso_motor_movimiento => Aviso_motor_movimiento,
+              semueveono => semueveono,
               Aviso_motor_puerta     => Aviso_motor_puerta);
 CLK_process :process
    begin
@@ -49,26 +52,30 @@ CLK_process :process
    
     stimuli : process
     begin
-        reset<='0';
+    	
        
+       Feedback_puerta <= '0';
+       reset<='0';
        Start <= '1';
        Piso_Actual<="00";
        Botonera<="01";
        
-       wait for 1 ns;
+       wait for 2 ns;
        
-       Feedback_puerta<='0';
-       
-       wait for 1 ns;
-       
+   		Feedback_puerta <='1';
         Piso_Actual<="01";
         Botonera <="01";
         
         wait for 1 ns;
         
-        Feedback_puerta <='1';
+        Feedback_puerta <='0';
+        
+        wait for 1 ns;
+     
+        Piso_Actual<="10";
+        Botonera <="00";
     
-      wait for 1 ns;
+      wait for 2 ns;
 
         ASSERT false
 			REPORT "Simulación finalizada. Test superado."
