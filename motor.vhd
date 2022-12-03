@@ -1,0 +1,28 @@
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity motor is
+    Port ( Aviso_ascensor : in std_logic_vector(1 downto 0);--00 parado, 01 bajando, 10 subiendo, 11 nada
+           clk : in STD_LOGIC;
+           reset : in STD_LOGIC;
+           Movimiento_ascensor: out std_logic_vector (1 downto 0);-- 00 parado, 10 para encender led subir y 01 para encender led de bajar, 11 nad
+           Luz_emergencia: out std_logic
+           );
+           
+end motor;
+
+architecture Behavioral of motor is
+
+begin
+process(clk,reset)
+  begin
+  if (reset='1') then
+     Luz_emergencia<='1'; --la accion de subir ni de bajar se no se ejecuta
+  elsif (rising_edge(clk)) then
+    Movimiento_ascensor<=Aviso_ascensor ;
+   end if;
+   
+  end process;
+     
+end Behavioral;
