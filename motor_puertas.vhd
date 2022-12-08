@@ -1,14 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity motor_puertas is
     Port ( 
@@ -16,7 +8,7 @@ entity motor_puertas is
            clk : in STD_LOGIC;
            reset : in STD_LOGIC;
            Movimiento_puertas: out std_logic;--0 cerrando, 1 abriendo
-           Luz_emergencia: out std_logic
+           Luz_emergencia_p: out std_logic
            );
 
 end motor_puertas;
@@ -27,7 +19,7 @@ begin
 process(clk,reset)
   begin
   if (reset='1') then
-     Luz_emergencia<='1'; 
+     Luz_emergencia_p<='1'; 
      Movimiento_puertas<='0';
   elsif (rising_edge(clk)) then
           Movimiento_puertas<=Aviso_puertas;
