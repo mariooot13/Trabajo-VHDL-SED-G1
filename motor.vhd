@@ -19,8 +19,11 @@ process(clk,reset)
   begin
   if (reset='1') then
      Luz_emergencia_m<='1'; --la accion de subir ni de bajar se no se ejecuta
+     Movimiento_ascensor<="00";
   elsif (rising_edge(clk)) then
-    Movimiento_ascensor<=Aviso_ascensor ;
+    Movimiento_ascensor<=Aviso_ascensor ;--puede que haya q meter una señal para trabajar con ella
+    Luz_emergencia_m<='0';
+        
    end if;
    
   end process;
