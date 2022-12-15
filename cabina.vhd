@@ -2,6 +2,14 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.ALL;
 
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
 
 entity Cabina is
     Port ( 
@@ -24,6 +32,9 @@ entity Cabina is
 end Cabina;
 
 architecture Behavioral of Cabina is
+        --signal S_Aviso_puertas: std_logic;
+     --signal S_Aviso_Ascensor: std_logic_vector(1 downto 0);
+   
     
         component motor 
         port(
@@ -46,14 +57,23 @@ architecture Behavioral of Cabina is
                 Luz_emergencia_p: out std_logic
              );
        end component ;
-     
-     --signal S_Aviso_puertas: std_logic;
-     --signal S_Aviso_Ascensor: std_logic_vector(1 downto 0);
-     signal contador: unsigned(1 downto 0):="00";
-    
-
+       
+      component Comparador 
+        port
+        (
+        clk: in std_logic;
+        reset: in std_logic;
+        Aviso_ascensor: in std_logic_vector(1 downto 0);--00 parado, 01 bajando, 10 subiendo, 11 nada
+        Aviso_motor_puerta: in std_logic;--0 cerrar,1 abrir
+        --Piso_objetivo: out std_logic_vector(1 downto 0);--Memoria boton
+        Piso_actual: out std_logic_vector(1 downto 0)
+       
+        );
+        end component;
+ 
        
 begin
+	
     inst_motor: motor port map(
          Aviso_ascensor => Aviso_Ascensor,
          clk =>clk, 
@@ -69,24 +89,15 @@ begin
        Movimiento_puertas=>Salida_leds_puertas,
        Luz_emergencia_p => Luz_emer_puertas
      );
-
-	logica:process(clk,reset)
-    		begin
-            if reset= '1' then
-            	contador <= (others => '0');
-            elsif rising_edge(clk) then
-             	if Aviso_motor_puerta = '0' and Aviso_ascensor = "10" then
-                	contador <= contador + 1;
-                 elsif Aviso_motor_puerta = '0' and Aviso_ascensor = "01" then
-					contador <= contador - 1;
-        	 	 else 
-                 	contador <= contador;
-                end if;
-             end if;
-        
-	end process;
-    
-    Piso_actual <= std_logic_vector(contador);
-  
+     
+     inst_Comparador: Comparador port map(
+     
+        clk=>clk,
+        reset=> reset,
+        Aviso_ascensor=>Aviso_ascensor,--00 parado, 01 bajando, 10 subiendo, 11 nada
+        Aviso_motor_puerta=>Aviso_motor_puerta,--0 cerrar,1 abrir
+        --Piso_objetivo: out std_logic_vector(1 downto 0);--Memoria boton
+        Piso_actual=> Piso_actual
+        );
 
 end Behavioral;
