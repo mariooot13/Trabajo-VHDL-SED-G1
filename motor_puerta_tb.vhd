@@ -11,18 +11,18 @@ architecture tb of tb_motor_puertas is
               clk                : in std_logic;
               reset              : in std_logic;
               Movimiento_puertas : out std_logic;
-              Luz_emergencia     : out std_logic);
+              Luz_emergencia_p     : out std_logic);
     end component;
 
     signal Aviso_puertas      : std_logic;
     signal clk                : std_logic;
     signal reset              : std_logic;
     signal Movimiento_puertas : std_logic;
-    signal Luz_emergencia     : std_logic;
+    signal Luz_emergencia_p    : std_logic;
 
     constant TbPeriod : time := 0.5 ns; -- EDIT Put right period here
-
-
+  
+  
 begin
 
     dut : motor_puertas
@@ -30,16 +30,16 @@ begin
               clk                => clk,
               reset              => reset,
               Movimiento_puertas => Movimiento_puertas,
-              Luz_emergencia     => Luz_emergencia);
+              Luz_emergencia_p    => Luz_emergencia_p);
    CLK_process :process
       begin
-        CLK <= '1';
-        wait for TbPeriod/2;
-        CLK <= '0';
-        wait for TbPeriod/2;
+		CLK <= '1';
+		wait for TbPeriod/2;
+		CLK <= '0';
+		wait for TbPeriod/2;
      end process;
-
-
+     
+     
     stimuli : process
     begin
         Aviso_puertas <='0';
@@ -49,6 +49,8 @@ begin
           reset<='1';
         wait;
         ASSERT false
-            REPORT "Simulación finalizada. Test superado."
-            SEVERITY FAILURE;
+			REPORT "Simulación finalizada. Test superado."
+			SEVERITY FAILURE;
     end process;
+
+end tb;
