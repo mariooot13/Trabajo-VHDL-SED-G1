@@ -11,14 +11,14 @@ architecture tb of tb_motor is
               clk                 : in std_logic;
               reset               : in std_logic;
               Movimiento_ascensor : out std_logic_vector (1 downto 0);
-              Luz_emergencia      : out std_logic);
+              Luz_emergencia_m      : out std_logic);
     end component;
 
     signal Aviso_ascensor      : std_logic_vector (1 downto 0);
     signal clk                 : std_logic;
     signal reset               : std_logic;
     signal Movimiento_ascensor : std_logic_vector (1 downto 0);
-    signal Luz_emergencia      : std_logic;
+    signal Luz_emergencia_m      : std_logic;
 
     constant TbPeriod : time := 0.5 ns; -- EDIT Put right period here
 
@@ -30,7 +30,7 @@ begin
               clk                 => clk,
               reset               => reset,
               Movimiento_ascensor => Movimiento_ascensor,
-              Luz_emergencia      => Luz_emergencia);
+              Luz_emergencia_m      => Luz_emergencia_m);
               
     CLK_process :process
       begin
@@ -52,7 +52,9 @@ begin
          Aviso_ascensor<="11";
           wait for 1 ns; 
           reset<='1';
-    
+          wait for 1 ns;
+          reset<='0';
+          Aviso_ascensor<="10";    
         wait;
         ASSERT false
 			REPORT "Simulación finalizada. Test superado."
@@ -60,3 +62,4 @@ begin
     end process;
 
 end tb;
+
