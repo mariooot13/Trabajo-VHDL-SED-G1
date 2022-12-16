@@ -17,7 +17,15 @@ entity FSM is
            Aviso_motor_movimiento: out std_logic_vector(1 downto 0); --00 parado, 01 bajando, 10 subiendo, 11 nada
            Aviso_motor_puerta:out std_logic; --1 que se abran,0 que se cierren
            --Piso_objetivo: out std_logic_vector -- va a ir a un decodificador o lo que sea para que nos imprima como camvbia de piso, se le va asignar luego memoria boton.
-           semueveono : out std_logic
+           --semueveono : out std_logic;
+           Aviso_Inicio:out std_logic ;
+           --Piso_objetivo: out std_logic_vector -- va a ir a un decodificador o lo que sea para que nos imprima como camvbia de piso, se le va asignar luego memoria boton.
+           --semueveono : out std_logic;
+           Aviso_Parado: out std_logic;
+           Aviso_Cerrar_puertas: out std_logic;
+           Aviso_Movimiento: out std_logic;
+           Aviso_Abrir:out std_logic
+           
            );
 end FSM;
 
@@ -27,67 +35,113 @@ architecture Behavioral of FSM is
     signal next_state: estado;
     signal memoria_boton: std_logic_vector(1 downto 0);
 begin
-state_reg: process (Clk)
+state_reg: process (Clk,Reset)
   begin
-    if Clk'event and clk= '1' then
-      if reset = '1' then
-        state <= inicial ;
-      else
-        state <= next_state;
-      end if;        
-    end if;
-  end process;
+    if Reset <='0' then
+        state<=inicial;
+     elsif rising_edge (clk) then 
+        state<=next_state ;
+        end if;
+     end process;
   
-nxt_state_decoder: process (clk,state,start)
+nxt_state_decoder: process (state,start,Feedback_puerta, Piso_Actual, Botonera)
   begin
+  next_state <=state;
     case state is
      when inicial =>
         if start='1' then
           next_state<=parado ;
           end if;
       when parado =>
-        if Piso_Actual /= Botonera then
+        if Piso_Actual /= memoria_boton and Feedback_puerta ='1'  then
           next_state<=cerrar_puertas  ;
           end if;
       when cerrar_puertas  =>
-        if Feedback_puerta='0' then
+       
+        if Feedback_puerta='0' and Piso_Actual /= memoria_boton then
           next_state<=movimiento ;
           end if;    
       when movimiento   =>
-        if Piso_Actual= Botonera and start = '1' then
+     
+        if Piso_Actual= memoria_boton  then
           next_state<=abrir_puertas ;
           end if;   
        when abrir_puertas    =>
-        if Feedback_puerta='1' then
+      
+        if Feedback_puerta='1'and Piso_Actual = memoria_boton  then
           next_state<=parado ;
           end if; 
-      -- when others =>
-       -- next_state <= inicial;
+      when others =>
+      next_state <= inicial;
     end case;
   end process;
   
-salidas: process(next_state)
+salidas: process(state)
 begin
     case next_state  is
+    when inicial=>
+    Aviso_inicio<='1';
+     Aviso_Parado<='0';
+     Aviso_Cerrar_puertas<='0';
+     Aviso_Movimiento<='0';
+     Aviso_Abrir<='0';
+     
      when parado => 
+     --led que se encienden por lo abrir_puertas
+     
+     Aviso_inicio<='0';
+     Aviso_Parado<='1';
+        Aviso_Cerrar_puertas<='0';
+           Aviso_Movimiento<='0';
+           Aviso_Abrir<='0';
+           
+     ----------------
         Aviso_motor_puerta<='1';
         Aviso_motor_movimiento<="00";
      when cerrar_puertas=>
+     -----------
+     Aviso_inicio<='0';
+     Aviso_Parado<='0';
+     Aviso_Cerrar_puertas<='1';
+     Aviso_Movimiento<='0';
+      Aviso_Abrir<='0';
+      ----------------
          Aviso_motor_puerta<='0';
          Aviso_motor_movimiento<="00";
       when movimiento=>
        
-       if(Botonera> Piso_Actual) then
+       if(memoria_boton > Piso_Actual) then
+       ---------------
+        Aviso_inicio<='0';
+     Aviso_Parado<='0';
+        Aviso_Cerrar_puertas<='0';
+           Aviso_Movimiento<='1';
+           Aviso_Abrir<='0';
+           --------------
             Aviso_motor_puerta<='0';
             Aviso_motor_movimiento<="10";
-            semueveono <= '1';--que subas
+            --semueveono <= '1';--que subas
         else
+        ----------------
+         Aviso_inicio<='0';
+         Aviso_Parado<='0';
+          Aviso_Cerrar_puertas<='0';
+           Aviso_Movimiento<='1';
+           Aviso_Abrir<='0';
+           --------------
             Aviso_motor_puerta<='0';
             Aviso_motor_movimiento<="01";
-            semueveono <= '1';-- que bajes
+            --semueveono <= '1';-- que bajes
         end if;
         
        when abrir_puertas =>
+       ---------------
+        Aviso_inicio<='0';
+     Aviso_Parado<='0';
+        Aviso_Cerrar_puertas<='0';
+           Aviso_Movimiento<='0';
+           Aviso_Abrir<='1';
+           ------------
             Aviso_motor_puerta<='1';
             Aviso_motor_movimiento<="00";
       when others =>
@@ -95,10 +149,10 @@ begin
      end case;
   end process;
    
---NO SE ESTA USANDO AHORA MISMO LA MEMORIA BOTON -> FALTA INTRODUCIRLA        
+ 
 memoria: process (reset,botonera,clk)-- clk dudoso
 begin
-    if Reset='1' then
+    if Reset='0' then
         memoria_boton<="00";
     elsif rising_edge(Clk) then 
         if (Botonera <="00") then
