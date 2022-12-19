@@ -1,4 +1,5 @@
 
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.all;
@@ -27,13 +28,13 @@ begin
          --if reset = '1' then
           --led_i := "000000"; --abierta la puerta 
          if rising_edge(clk) then
-       		 if Aviso_puerta = '1' then
+       		 if Aviso_puerta = '0' then
                if led_i(5) /= '1' then
                led_i := led_i(led_i'high - 1 downto 0) & '1';  
         		--i = i +1;
       			end if;
-               Estado_puerta <= '0'; --cerrado, me abro
-               else --111111 cerrada la puerta
+               Estado_puerta <= '0'; --cerrado, me abro NO TOCAR
+             elsif Aviso_puerta = '1' then --111111 cerrada la puerta
                  if led_i(0) /= '0' then
                  led_i := '0' & led_i(led_i'high downto 1);
 				end if;
