@@ -2,14 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity Cabina is
     Port ( 
@@ -19,11 +12,12 @@ entity Cabina is
         Aviso_motor_puerta: in std_logic;--0 cerrar,1 abrir
         --Piso_objetivo: out std_logic_vector(1 downto 0);--Memoria boton
         Piso_actual: out std_logic_vector(1 downto 0);
-        --Feedback_puerta:out std_logic
+        Feedback_puerta:out std_logic;-- para pobrear es una señal
         --Feedback_motor: out std_logic_vector(2 downto 0);
        --cont: out std_logic_vector(1 downto 0)
        Salida_leds_motor: out std_logic_vector(1 downto 0);
        Salida_leds_puertas: out std_logic;
+      Salida_barrido: out std_logic_vector(5 downto 0);
        Luz_emer_motor: out std_logic;
        Luz_emer_puertas: out std_logic
        
@@ -32,7 +26,7 @@ entity Cabina is
 end Cabina;
 
 architecture Behavioral of Cabina is
-        --signal S_Aviso_puertas: std_logic;
+        signal S_Aviso_puertas: std_logic;
      --signal S_Aviso_Ascensor: std_logic_vector(1 downto 0);
    
     
@@ -70,7 +64,18 @@ architecture Behavioral of Cabina is
        
         );
         end component;
- 
+        component BarridoLed
+            port(
+            clk 		  : in  std_logic;
+        --reset 		  : in  std_logic;
+      	Aviso_puerta : in  std_logic; --1 abrir 0 cerrar
+        Estado_puerta: out std_logic;
+      LED 		  : out std_logic_vector(5 downto 0) --ceros abierta, unos cerrada
+        );
+        end component ;
+            
+            
+            
        
 begin
 	
@@ -86,7 +91,7 @@ begin
        Aviso_puertas => Aviso_motor_puerta, 
        clk => clk,
        reset => reset,
-       Movimiento_puertas=>Salida_leds_puertas,
+       Movimiento_puertas=>S_Aviso_puertas,
        Luz_emergencia_p => Luz_emer_puertas
      );
      
@@ -99,5 +104,10 @@ begin
         --Piso_objetivo: out std_logic_vector(1 downto 0);--Memoria boton
         Piso_actual=> Piso_actual
         );
-
-end Behavioral;
+        
+        inst_BarridoLed: BarridoLed port map(
+            clk 		 =>clk,
+      	Aviso_puerta =>S_Aviso_puertas,--1 abrir 0 cerrar
+        Estado_puerta=>Feedback_puerta,
+      LED 		  =>Salida_barrido --ceros abierta, unos cerrada
+        );
