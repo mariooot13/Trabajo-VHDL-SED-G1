@@ -9,7 +9,7 @@ entity DivisorFrecuencia is
 	);
     port (
         clk_entrada : in  std_logic; 
-        reset       : in  std_logic; 
+        reset_n     : in  std_logic; 
         clk_salida  : out std_logic
  );
 end DivisorFrecuencia;
@@ -25,13 +25,13 @@ begin
 	    subtype count_t is integer range 0 to SEMIPERIOD - 1;
 	    variable count : count_t;
 	begin
-        if reset = '1' then
+        if reset_n = '0' then
             count := 0;
 			salida <= '0';
         elsif rising_edge(clk_entrada) then
             count := (count + 1) mod SEMIPERIOD;
             if count = 0 then
-                salida <= NOT(salida);
+                salida <= not salida;
             end if;
         end if;
 	end process;
