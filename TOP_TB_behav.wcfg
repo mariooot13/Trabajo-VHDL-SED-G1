@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000000000 ms"></ZoomStartTime>
-      <ZoomEndTime time="2,675.081904907 ms"></ZoomEndTime>
-      <Cursor1Time time="986.100000000 ms"></Cursor1Time>
+      <ZoomStartTime time="0.000000000000 s"></ZoomStartTime>
+      <ZoomEndTime time="11.000075000001 s"></ZoomEndTime>
+      <Cursor1Time time="11.000075000000 s"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="152"></NameColumnWidth>
-      <ValueColumnWidth column_width="73"></ValueColumnWidth>
+      <ValueColumnWidth column_width="69"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="21" />
+   <WVObjectSize size="23" />
    <wave_markers>
       <marker time="3000550000000" label="" />
    </wave_markers>
@@ -51,11 +51,22 @@
       <obj_property name="ElementShortName">sw[3:0]</obj_property>
       <obj_property name="ObjectShortName">sw[3:0]</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
-      <obj_property name="isExpanded"></obj_property>
    </wvobject>
    <wvobject type="divider" fp_name="divider61">
       <obj_property name="label">STATE</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/uut/current_floor" type="array">
+      <obj_property name="ElementShortName">current_floor[3:0]</obj_property>
+      <obj_property name="ObjectShortName">current_floor[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/uut/full_open" type="logic">
+      <obj_property name="ElementShortName">full_open</obj_property>
+      <obj_property name="ObjectShortName">full_open</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/uut/full_closed" type="logic">
+      <obj_property name="ElementShortName">full_closed</obj_property>
+      <obj_property name="ObjectShortName">full_closed</obj_property>
    </wvobject>
    <wvobject fp_name="/TOP_TB/uut/fsm0/nxt_state" type="other">
       <obj_property name="ElementShortName">nxt_state</obj_property>
@@ -72,10 +83,6 @@
    <wvobject fp_name="/TOP_TB/uut/fsm0/btn_memo" type="array">
       <obj_property name="ElementShortName">btn_memo[3:0]</obj_property>
       <obj_property name="ObjectShortName">btn_memo[3:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/TOP_TB/uut/current_floor" type="array">
-      <obj_property name="ElementShortName">current_floor[3:0]</obj_property>
-      <obj_property name="ObjectShortName">current_floor[3:0]</obj_property>
    </wvobject>
    <wvobject type="divider" fp_name="divider63">
       <obj_property name="label">OUTPUTS</obj_property>
