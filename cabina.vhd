@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity CABINA is
     port (
-        -- Coomon I/O
+        -- Common I/O
         RESET_N          : in  std_logic;
         CLK              : in  std_logic;
 
