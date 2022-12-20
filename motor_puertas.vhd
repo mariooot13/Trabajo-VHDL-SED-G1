@@ -16,21 +16,21 @@ entity MOTOR_PUERTAS is
 end MOTOR_PUERTAS;
 
 architecture BEHAVIORAL of MOTOR_PUERTAS is
-  type door_frame_vector is array (natural range <>) of std_logic_vector(DOOR_POS'range);
-  constant door_frames : door_frame_vector := ("00000000", "10000001", "11000011", "11100111", "11111111");   
-  subtype pos_t is door_frames'range;
-  signal pos : pos_t;
+    type door_frame_vector is array (natural range <>) of std_logic_vector(DOOR_POS'range);
+    constant door_frames : door_frame_vector := ("00000000", "10000001", "11000011", "11100111", "11111111");
+    subtype pos_t is door_frames'range;
+    signal pos : pos_t;
 begin
     process(CLK, RESET_N)
     begin
         if RESET_N = '0' then
-            pos <= 0; -- Door initial state: open
+            pos <= pos_t'low; -- Door initial state: open
         elsif rising_edge(CLK) then
             if CE = '1' then
                 if DO_OPEN = '1' and pos > pos_t'low then
-                    pos <= pos - 1;
+                    pos <= pos_t'pred(pos);
                 elsif DO_CLOSE = '1' and pos < pos_t'high then
-                    pos <= pos + 1;
+                    pos <= pos_t'succ(pos);
                 end if;
             end if;
         end if;
