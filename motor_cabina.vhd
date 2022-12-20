@@ -20,15 +20,16 @@ begin
     begin
         if RESET_N = '0' then
             floor_i <= "0001";
-            LUZ_EMERGENCIA_M <= '0'; --la accion de subir ni de bajar se no se ejecuta
         elsif rising_edge(CLK) then
-          if CE = '1' then
-              if UP = '1' and floor_i /= "1000" then
-                  floor_i <= floor_i(floor_i'high - 1 downto 0) & '0';
-              elsif DN = '1' and floor_i /= "0001" then
-                  floor_i <= '0' & floor_i(floor_i'high downto 1);
-              end if;
-          end if;
-      end if;
-  end process;     
+            if CE = '1' then
+                if UP = '1' and floor_i /= "1000" then
+                    floor_i <= floor_i(floor_i'high - 1 downto 0) & '0';
+                elsif DN = '1' and floor_i /= "0001" then
+                    floor_i <= '0' & floor_i(floor_i'high downto 1);
+                end if;
+            end if;
+        end if;
+    end process;     
+
+    LUZ_EMERGENCIA_M <= '0'; --la accion de subir ni de bajar se no se ejecuta
 end BEHAVIORAL;

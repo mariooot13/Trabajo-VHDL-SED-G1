@@ -25,7 +25,6 @@ begin
     begin
         if RESET_N = '0' then
             pos <= 0; -- Door initial state: open
-            LUZ_EMERGENCIA_P <= '0';
         elsif rising_edge(CLK) then
             if CE = '1' then
                 if DO_OPEN = '1' and pos > pos_t'low then
@@ -37,6 +36,7 @@ begin
         end if;
     end process;
 
+    LUZ_EMERGENCIA_P <= '0';
     FULL_OPEN   <= '1' when pos = pos_t'low else '0';
     FULL_CLOSED <= '1' when pos = pos_t'high else '0';
     DOOR_POS    <= door_frames(pos);
