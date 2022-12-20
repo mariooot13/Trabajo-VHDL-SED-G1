@@ -31,5 +31,6 @@ begin
         end if;
     end process;     
 
+    FLOOR <= floor_i;
     LUZ_EMERGENCIA_M <= '0'; --la accion de subir ni de bajar se no se ejecuta
 end BEHAVIORAL;
