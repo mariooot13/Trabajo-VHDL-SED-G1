@@ -136,7 +136,7 @@ begin
             STROBES => strobes
       );
 
-    -- TODO: synchronize & filter buttons
+    -- TODO: synchronize & filter buttons & edge detection
     fltrd_buttons <= BUTTONS;
 
     fsm0: FSM
