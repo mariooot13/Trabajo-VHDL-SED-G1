@@ -87,13 +87,17 @@ begin
 
     stimgen: process
     begin
+        sw <= "0000";
         cpu_resetn <= '0' after 0.25 * CLK_PERIOD, '1' after 0.75 * CLK_PERIOD;
         wait until cpu_resetn = '1';
-        sw <= "0100";
+        sw <= "1000";
         wait for 500 ms;
         sw <= "0000";
         wait for 5 sec;
-
+        sw <= "0010";
+        wait for 500 ms;
+        sw <= "0000";
+        wait for 5 sec;
         assert false
           report "[PASS]: simulation finished."
           severity failure;
