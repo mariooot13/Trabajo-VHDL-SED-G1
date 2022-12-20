@@ -90,7 +90,7 @@ begin
         cpu_resetn <= '0' after 0.25 * CLK_PERIOD, '1' after 0.75 * CLK_PERIOD;
         wait until cpu_resetn = '1';
         sw <= "0100";
-        wait for 1.5 ms;
+        wait for 500 ms;
         sw <= "0000";
         wait for 5 sec;
 
