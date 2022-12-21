@@ -80,4 +80,4 @@ begin
             LUZ_EMERGENCIA_P => LUZ_EMER_PUERTAS
         );
 
-end architecture Structural;
+end architecture STRUCTURAL;
