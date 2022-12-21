@@ -44,7 +44,7 @@ begin
             when S0_INITIAL =>
                 if BUTTONS /= "0000" and BUTTONS /= FLOOR then
                     nxt_state <= S1_CLOSING;
-                    nxt_btn_memo  <= BUTTONS;
+                    nxt_btn_memo <= BUTTONS;
                 end if;
 
             when S1_CLOSING =>
