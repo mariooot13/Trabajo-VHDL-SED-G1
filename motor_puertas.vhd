@@ -18,7 +18,7 @@ end MOTOR_PUERTAS;
 architecture BEHAVIORAL of MOTOR_PUERTAS is
     type door_frame_vector is array (natural range <>) of std_logic_vector(DOOR_POS'range);
     constant door_frames : door_frame_vector := ("00000000", "10000001", "11000011", "11100111", "11111111");
-    subtype pos_t is door_frames'range;
+    subtype pos_t is integer range door_frames'range;
     signal pos : pos_t;
 begin
     process(CLK, RESET_N)
