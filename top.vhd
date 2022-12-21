@@ -6,7 +6,7 @@ use work.STROBE_GENERATION.all;
 entity TOP is
     generic (
         CLKIN_FREQ  : integer := 100_000_000; -- Nexys4 DDR 100 MHz
-        SYSCLK_FREQ : integer :=        1000  -- System clock frequency 1 kHz
+        SYSCLK_FREQ : integer :=       1_000  -- System clock frequency 1 kHz
     );
     port (
         CLK100MHZ  : in  std_logic;
@@ -18,7 +18,8 @@ entity TOP is
         LED16_R    : out std_logic;
         LED17_B    : out std_logic;
         LED17_G    : out std_logic;
-        LED17_R    : out std_logic
+        LED17_R    : out std_logic;
+        AN         : out std_logic_vector( 7 downto 0)
     );
 end TOP;
 
@@ -114,6 +115,7 @@ begin
     CLOSE_LED <= do_close;
 
     LED(11 downto 8) <= (others => '0');  -- Unused by now
+    AN <= (others => '1');  -- Prevent digit dim glowing
 
     prescaler0: DivisorFrecuencia
         generic map (
@@ -128,7 +130,7 @@ begin
 
     strobe_gen0: STROBE_GENERATOR
         generic map (
-            MODULI  => (250, 1000)
+            MODULI  => (250, 1000)  -- 4Hz, 1Hz
         )
         port map ( 
             RST_N   => CPU_RESETN,
