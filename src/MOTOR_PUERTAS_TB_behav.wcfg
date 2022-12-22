@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="MOTOR_PUERTAS_TB_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="MOTOR_PUERTAS_TB" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000000000 ms"></ZoomStartTime>
+      <ZoomEndTime time="2,859.500000001 ms"></ZoomEndTime>
+      <Cursor1Time time="417.522085890 ms"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="152"></NameColumnWidth>
+      <ValueColumnWidth column_width="61"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="10" />
+   <wvobject fp_name="/MOTOR_PUERTAS_TB/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MOTOR_PUERTAS_TB/reset_n" type="logic">
+      <obj_property name="ElementShortName">reset_n</obj_property>
+      <obj_property name="ObjectShortName">reset_n</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MOTOR_PUERTAS_TB/ce" type="logic">
+      <obj_property name="ElementShortName">ce</obj_property>
+      <obj_property name="ObjectShortName">ce</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MOTOR_PUERTAS_TB/do_open" type="logic">
+      <obj_property name="ElementShortName">do_open</obj_property>
+      <obj_property name="ObjectShortName">do_open</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MOTOR_PUERTAS_TB/do_close" type="logic">
+      <obj_property name="ElementShortName">do_close</obj_property>
+      <obj_property name="ObjectShortName">do_close</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MOTOR_PUERTAS_TB/uut/pos" type="other">
+      <obj_property name="ElementShortName">pos</obj_property>
+      <obj_property name="ObjectShortName">pos</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MOTOR_PUERTAS_TB/full_open" type="logic">
+      <obj_property name="ElementShortName">full_open</obj_property>
+      <obj_property name="ObjectShortName">full_open</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MOTOR_PUERTAS_TB/full_closed" type="logic">
+      <obj_property name="ElementShortName">full_closed</obj_property>
+      <obj_property name="ObjectShortName">full_closed</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MOTOR_PUERTAS_TB/door_pos" type="array">
+      <obj_property name="ElementShortName">door_pos[7:0]</obj_property>
+      <obj_property name="ObjectShortName">door_pos[7:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MOTOR_PUERTAS_TB/luz_emergencia_p" type="logic">
+      <obj_property name="ElementShortName">luz_emergencia_p</obj_property>
+      <obj_property name="ObjectShortName">luz_emergencia_p</obj_property>
+   </wvobject>
+</wave_config>

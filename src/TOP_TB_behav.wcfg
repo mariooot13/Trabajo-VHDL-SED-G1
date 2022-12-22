@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="TOP_TB_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="TOP_TB" />
+            <top_module name="strobe_generation" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000000000000 s"></ZoomStartTime>
+      <ZoomEndTime time="10.000000000001 s"></ZoomEndTime>
+      <Cursor1Time time="2.999550000000 s"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="152"></NameColumnWidth>
+      <ValueColumnWidth column_width="65"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="23" />
+   <wvobject type="divider" fp_name="divider62">
+      <obj_property name="label">TIMING</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/clk100mhz" type="logic">
+      <obj_property name="ElementShortName">clk100mhz</obj_property>
+      <obj_property name="ObjectShortName">clk100mhz</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/uut/sys_clk" type="logic">
+      <obj_property name="ElementShortName">sys_clk</obj_property>
+      <obj_property name="ObjectShortName">sys_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/uut/strobes" type="array">
+      <obj_property name="ElementShortName">strobes[1:0]</obj_property>
+      <obj_property name="ObjectShortName">strobes[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider64">
+      <obj_property name="label">INPUTS</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/cpu_resetn" type="logic">
+      <obj_property name="ElementShortName">cpu_resetn</obj_property>
+      <obj_property name="ObjectShortName">cpu_resetn</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/sw" type="array">
+      <obj_property name="ElementShortName">sw[3:0]</obj_property>
+      <obj_property name="ObjectShortName">sw[3:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider61">
+      <obj_property name="label">STATE</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/uut/current_floor" type="array">
+      <obj_property name="ElementShortName">current_floor[3:0]</obj_property>
+      <obj_property name="ObjectShortName">current_floor[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/uut/full_open" type="logic">
+      <obj_property name="ElementShortName">full_open</obj_property>
+      <obj_property name="ObjectShortName">full_open</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/uut/full_closed" type="logic">
+      <obj_property name="ElementShortName">full_closed</obj_property>
+      <obj_property name="ObjectShortName">full_closed</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/uut/fsm0/nxt_state" type="other">
+      <obj_property name="ElementShortName">nxt_state</obj_property>
+      <obj_property name="ObjectShortName">nxt_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/uut/fsm0/state" type="other">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/uut/fsm0/nxt_btn_memo" type="array">
+      <obj_property name="ElementShortName">nxt_btn_memo[3:0]</obj_property>
+      <obj_property name="ObjectShortName">nxt_btn_memo[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/uut/fsm0/btn_memo" type="array">
+      <obj_property name="ElementShortName">btn_memo[3:0]</obj_property>
+      <obj_property name="ObjectShortName">btn_memo[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider63">
+      <obj_property name="label">OUTPUTS</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/led" type="array">
+      <obj_property name="ElementShortName">led[15:0]</obj_property>
+      <obj_property name="ObjectShortName">led[15:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/led16_b" type="logic">
+      <obj_property name="ElementShortName">led16_b</obj_property>
+      <obj_property name="ObjectShortName">led16_b</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/led16_g" type="logic">
+      <obj_property name="ElementShortName">led16_g</obj_property>
+      <obj_property name="ObjectShortName">led16_g</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/led16_r" type="logic">
+      <obj_property name="ElementShortName">led16_r</obj_property>
+      <obj_property name="ObjectShortName">led16_r</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/led17_b" type="logic">
+      <obj_property name="ElementShortName">led17_b</obj_property>
+      <obj_property name="ObjectShortName">led17_b</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/led17_g" type="logic">
+      <obj_property name="ElementShortName">led17_g</obj_property>
+      <obj_property name="ObjectShortName">led17_g</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TOP_TB/led17_r" type="logic">
+      <obj_property name="ElementShortName">led17_r</obj_property>
+      <obj_property name="ObjectShortName">led17_r</obj_property>
+   </wvobject>
+</wave_config>
